@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import OrderBy from './components/OrderBy';
 import OrderContext from './contexts/OrderContext';
 import { OrderTypes } from './types/order';
+import JobDefinition from './types/job';
 
 import './App.css';
 
@@ -17,7 +18,17 @@ const App: React.FC = () => {
     setJobs(data);
   };
 
-  const toggleOrder = (newOrder: string) => console.log(newOrder);
+  const toggleOrder = (newOrder: string) => {
+    const jobsCopy = [...jobs];
+    if (newOrder === OrderTypes.Priority) {
+      jobsCopy.sort((a: JobDefinition, b: JobDefinition) =>
+        a.priority > b.priority ? -1 : 1
+      );
+    } else {
+      jobsCopy.sort(() => 0.5 - Math.random());
+    }
+    setJobs(jobsCopy);
+  };
 
   useEffect(() => {
     setTimeout(() => fetchData(), 3000);
@@ -44,7 +55,7 @@ const App: React.FC = () => {
           </div>
         ) : (
           <div data-testid='app-jobs' className='App-jobs'>
-            <OrderBy />
+            <OrderBy toggleOrder={toggleOrder} />
             {JobList}
           </div>
         )}
