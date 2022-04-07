@@ -1,0 +1,6 @@
+- Introduced a loading component that shows on screen while we fetch data.
+- Added Sorting Functionality for both "Priority" and "Random"
+- Added Pagination to load larger datasets as per requirement.
+- Fixed some typos like Priority
+- Added answer.md file to answer wp-generate-password(8) question.
+- Added merge-request.md to provide sample of PR request.
